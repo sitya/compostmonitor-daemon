@@ -2,10 +2,8 @@
 
 source /var/compostmonitor-daemon/main.conf
 
-
 for point in `ls $PROCDIR`
 do
-  #params=`echo $point | awk -F  "." '{print "id=" $1 "&time=" $2 "&value="}'`
   params=`echo $point | awk -F  "." '{print "{\"localid\";\""$1"\",\"timestamp\";\""$2 }'`
   json={${params:1}\",\"value\":\"`cat $PROCDIR/$point`\"}
   trying=0
